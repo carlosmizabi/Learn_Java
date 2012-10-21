@@ -18,21 +18,7 @@ public class Template {
 		String text = in.nextLine();
 		text += text;
 		
-		if ( A > B && B > C) { 
-			System.out.println( A + B + C);
-		}else{
-			System.out.println( C + B + A);
-		}
-		if ( B > C && C > A) { 
-			System.out.println( B + C + A);
-		}else{
-			System.out.println( A + C + B);
-		}
-		if ( A > B && B > C) { 
-			System.out.println( C + A + B);
-		}else{
-			System.out.println( B + A + C);
-		}
+		
 		
 		System.out.println("");
 		

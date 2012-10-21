@@ -17,8 +17,7 @@ public class NearestPoint {
 		while (flag){
 			
 			Scanner in = new Scanner(System.in);
-			
-			// Get the text
+		
 			System.out.println("Enter the coordinates of 3 points: ");
 			
 			System.out.println("First point: ");
