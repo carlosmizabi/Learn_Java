@@ -23,7 +23,7 @@ public class Rectangle {
 		
 			Scanner in = new Scanner(System.in);
 			
-			System.out.println("Enter the coordinates of 3 points: ");
+			System.out.println("Enter the coordinates of 2 points: ");
 			
 			System.out.println("First point: ");
 			int xA = in.nextInt();
