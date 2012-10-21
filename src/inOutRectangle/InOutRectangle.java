@@ -21,12 +21,29 @@ public class InOutRectangle {
 		while (flag){
 		
 			Scanner in = new Scanner(System.in);
-			// Get the text
-			System.out.println("Enter the text: ");
-			String text = in.nextLine();
-			text += text;
+
+			System.out.println("To create a rectangle ");
+			System.out.println("Enter the coordinates of 2 points: ");
 			
+			System.out.println("First point: ");
+			int xA = in.nextInt();
+			int yA = in.nextInt();
+	        
+			System.out.println("Second point: ");
+			int xB = in.nextInt();
+			int yB = in.nextInt();
 			
+			System.out.println("Now, to check if a point falls inside or \n" +
+					"outside of the rectangle \n Enter another point: ");
+			int xC = in.nextInt();
+			int yC = in.nextInt();
+			
+			// Check which X is higher
+			if ( (xA - xB) > 0 ){
+				// is xC greater then xA and smaller then xB
+			} else {
+				
+			}
 			
 			System.out.println("");
 			
