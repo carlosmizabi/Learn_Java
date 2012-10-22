@@ -38,11 +38,37 @@ public class InOutRectangle {
 			int xC = in.nextInt();
 			int yC = in.nextInt();
 			
-			// Check which X is higher
+			// counter IF == 2 then INSIDE
+			int insideRect = 0;
+			// Check which X is higher, if positive then A
 			if ( (xA - xB) > 0 ){
-				// is xC greater then xA and smaller then xB
-			} else {
-				
+				// is xC greater than xB and smaller than xA
+				if ( xC > xB && xC < xA) {
+					insideRect++;
+				}
+			}else{ // else negative than B
+				// is xC greater than xB and smaller than xA
+				if ( xC > xA && xC < xB) {
+					insideRect++;
+				}
+			}
+			// Check which Y higher, if positive then A
+			if ( (yA - yB) > 0) {
+				// is yC greater than yB and Smaller than A
+				if ( yC > yB && yC < yA) {
+					insideRect++;
+				}
+			}else{ // else negative than B
+				// is xC greater than xB and smaller than xA
+				if ( yC > yA && yC < yB) {
+					insideRect++;
+				}
+			}
+			
+			if (insideRect == 2){
+				System.out.println("The point is INSIDE the Rectangle");
+			}else{
+				System.out.println("The point is OUTSIDE the Rectangle");
 			}
 			
 			System.out.println("");
