@@ -38,8 +38,16 @@ public class MailServer {
 								"\n|_____________________________________________________________|" +
 								"\n| (3) \"DATA:\"                                                 |" +
 								"\n|   >> finally, write your message                            |" +
-								"\n|_____________________________________________________________");
+								"\n|_____________________________________________________________|");
 			
+			//Get and check Sender email
+			MailFrom();
+			
+			///Get and check Receiver email
+			MailTo();
+			
+			//Get the message
+			MailMessage();
 			
 			// repeat or exit menu
 			flag = exitMenu();
@@ -51,6 +59,26 @@ public class MailServer {
 	
 	} // \\\\\\\\\\\\\\\\\\\\\ //
 	
+	///////////////////////////////////////////////////////////
+	// MailFrom 
+	//////////////////////////////////////////////////////////
+	public static void MailFrom(){
+		System.out.println("Je sui le MailFrom");
+	}
+	
+	///////////////////////////////////////////////////////////
+	// MailFrom 
+	//////////////////////////////////////////////////////////
+	public static void MailTo(){
+		System.out.println("Je sui le MailTo");
+	}
+	
+	///////////////////////////////////////////////////////////
+	// MailMessage
+	//////////////////////////////////////////////////////////
+	public static void MailMessage(){
+	System.out.println("Je sui le MailMessage");
+	}
 	
 	///////////////////////////////////////////////////////////
 	// Repeat or Exit menu
