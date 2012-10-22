@@ -20,88 +20,113 @@ public class MailServer {
 		// Welcome to My Mail Server!
 		System.out.println("Welcome to My Mail Server!");
 		
-		boolean flag = true;
-		while (flag){
+		// DISPLAY HELP MESSAGE
+		HelpMessage();
 		
-			System.out.println( "\n _____________________________________________________________ " +
-								"\n| To Send an Email you must type the                          |" +
-								"\n| The following COMMANDS exactly, without the quotes          |" +
-								"\n| and in the right order                                      |" +
-								"\n|_____________________________________________________________|" +
-								"\n| (1) \"MAIL FROM:\"                                            |" +
-								"\n|   >> then enter your valid email address, ex.:              |" + 
-								"\n|   >> yourAdress@email.com                                   |" +
-								"\n|_____________________________________________________________|" +
-								"\n| (2) \"RPCT TO:\"                                              |" +
-								"\n|   >> then enter the recipients email address, ex.:          |" +
-								"\n|   >> recipents@email.com                                    |" +
-								"\n|_____________________________________________________________|" +
-								"\n| (3) \"DATA:\"                                                 |" +
-								"\n|   >> finally, write your message                            |" +
-								"\n|_____________________________________________________________|");
-			
-			//Get and check Sender email
-			MailFrom();
-			
-			///Get and check Receiver email
-			MailTo();
-			
-			//Get the message
-			MailMessage();
-			
-			// repeat or exit menu
-			flag = exitMenu();
-		
-		
-	} /*XX closes while (flag){} XX*/
+		// START COMMAND LINE MENU
+		CommandMenu();
+	
 	
 	System.out.println("Thank you, and Goodbye! ");
 	
 	} // \\\\\\\\\\\\\\\\\\\\\ //
 	
+	
+	///////////////////////////////////////////////////////////
+	// CommandMenu 
+	//////////////////////////////////////////////////////////
+	public static void CommandMenu(){
+	
+		System.out.println("Enter your Command:");
+		
+		Scanner in = new Scanner(System.in);
+		
+		boolean loop = true;
+		while (loop == true){
+			
+			// Get Command
+			String str = in.nextLine();
+			String command = str.toUpperCase();
+			
+			if (command.equals("QUIT")) {
+				loop = false;
+				
+			}else if(command.equals("MAIL FROM:")){
+				
+				// Get and check Sender email
+				MailFrom();
+				
+			}else if (command.equals("MAIL TO:")){
+				
+				// Get and check Receiver email
+				MailTo();
+				
+			}else if (command.equals("DATA:")){
+				
+				// Get the message
+				MailMessage();
+				
+			}else if (command.equals("HELP") || command.equals("HELP:")){
+				// SHOW THE HELP MENU
+				HelpMessage();
+			}else{
+				System.out.println("ERROR: Command NOT recognized!!");
+			}
+		}
+		
+		
+		
+		
+		
+		
+		
+	} // \\\\\\\\\\\\\\\\\\\\\ //
+
 	///////////////////////////////////////////////////////////
 	// MailFrom 
 	//////////////////////////////////////////////////////////
 	public static void MailFrom(){
 		System.out.println("Je sui le MailFrom");
-	}
+	} // \\\\\\\\\\\\\\\\\\\\\ //
 	
 	///////////////////////////////////////////////////////////
 	// MailFrom 
 	//////////////////////////////////////////////////////////
 	public static void MailTo(){
 		System.out.println("Je sui le MailTo");
-	}
+	} // \\\\\\\\\\\\\\\\\\\\\ //
 	
 	///////////////////////////////////////////////////////////
 	// MailMessage
 	//////////////////////////////////////////////////////////
 	public static void MailMessage(){
 	System.out.println("Je sui le MailMessage");
-	}
+	} // \\\\\\\\\\\\\\\\\\\\\ //
 	
 	///////////////////////////////////////////////////////////
-	// Repeat or Exit menu
+	// HelpMessage
 	//////////////////////////////////////////////////////////
-	public static boolean exitMenu(){
-	
-		System.out.println("");
-		Scanner in = new Scanner(System.in);
-		boolean flag = true;
-		int menu = 3;
-		// while not 0 or 1 ask again
-		while ( menu != 0 && menu != 1  ) {
-			System.out.println("Would you like to: \n" +
-			"Repeat [1] \n" +
-			"Exit   [0] \n");
-			menu = in.nextInt();
-			
-			// exit programe
-			if ( menu == 0 ){
-				return flag = false;
-			} 
-		}
-		return flag;
+	public static void HelpMessage(){
+		System.out.println( "\n _____________________________________________________________ " +
+							"\n| To Send an Email you must type the                          |" +
+							"\n| The following COMMANDS exactly, without the quotes          |" +
+							"\n| and in the right order                                      |" +
+							"\n|_____________________________________________________________|" +
+							"\n| (1) \"MAIL FROM:\"                                            |" +
+							"\n|   >> then enter your valid email address, ex.:              |" + 
+							"\n|   >> yourAdress@email.com                                   |" +
+							"\n|_____________________________________________________________|" +
+							"\n| (2) \"RPCT TO:\"                                              |" +
+							"\n|   >> then enter the recipients email address, ex.:          |" +
+							"\n|   >> recipents@email.com                                    |" +
+							"\n|_____________________________________________________________|" +
+							"\n| (3) \"DATA:\"                                                 |" +
+							"\n|   >> finally, write your message                            |" +
+							"\n|_____________________________________________________________|" +
+							"\n| (?) \"HELP\"                                                 |" +
+							"\n|   >> to see this menu again                                 |" +
+							"\n|_____________________________________________________________|");
 	} // \\\\\\\\\\\\\\\\\\\\\ //
+	
 
 } /*|*********************/
