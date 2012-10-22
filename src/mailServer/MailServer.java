@@ -44,11 +44,28 @@ public class MailServer {
 		boolean loop = true;
 		while (loop == true){
 			
+			System.out.print(">>> ");
 			// Get Command
-			String str = in.nextLine();
-			String command = str.toUpperCase();
+			String commandLine = in.nextLine();
+			int length = commandLine.length();
 			
-			if (command.equals("QUIT")) {
+			// get the length up to :
+			int twoDots = 0;
+			for (int i = 0; i < length; i++){
+				twoDots++;
+				char x = commandLine.charAt(i);
+				if (x == ':'){
+					break;
+				}
+			}
+			String commandTemp = commandLine.substring(0, twoDots);
+			String command = commandTemp.toUpperCase();
+			String cmdINPUT = commandLine.substring(twoDots);
+			System.out.println("Command: " + command);
+			System.out.println("cmdINPUT: " + cmdINPUT);
+			
+			int quitter = command.length(); 
+			if (quitter == 4 && command.equals("QUIT")) {
 				loop = false;
 				
 			}else if(command.equals("MAIL FROM:")){
@@ -66,19 +83,14 @@ public class MailServer {
 				// Get the message
 				MailMessage();
 				
-			}else if (command.equals("HELP") || command.equals("HELP:")){
+			}else if (command.equals("HELP:")){
 				// SHOW THE HELP MENU
 				HelpMessage();
 			}else{
 				System.out.println("ERROR: Command NOT recognized!!");
 			}
 		}
-		
-		
-		
-		
-		
-		
+	
 		
 	} // \\\\\\\\\\\\\\\\\\\\\ //
 
