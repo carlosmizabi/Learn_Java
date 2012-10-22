@@ -3,9 +3,25 @@ package mailServer;
 import java.util.Scanner;
 
 /*|********************************************************
+/*| Class MailData                         
+/*|*******************************************************/
+class MailData {
+	
+	String from;
+	String to;
+	String message;
+	
+} /*|*********************/
+
+
+/*|********************************************************
 /*| Class MailServer                         
 /*|*******************************************************/
 public class MailServer {
+	
+	// Command line variables
+	static String cmd = "";
+	static String input = "";
 
 	/*
 	 * implements part of a mail server. A mail 
@@ -16,6 +32,7 @@ public class MailServer {
 	 * used to send emails over the Internet.
 	 */
 	public static void main(String[] args) {
+		
 		
 		// Welcome to My Mail Server!
 		System.out.println("Welcome to My Mail Server!");
@@ -31,15 +48,72 @@ public class MailServer {
 	
 	} // \\\\\\\\\\\\\\\\\\\\\ //
 	
+	///////////////////////////////////////////////////////////
+	// CmdProcessor
+	//////////////////////////////////////////////////////////
+	public static void CmdProcessor(String commandLine){
+		 
+				
+		// GET LENGTH OF INPUT 
+		int length = commandLine.length();
+		// NO : SENTINEL
+		boolean sentinel = false;
+		
+		// GET COMMAND (COUNT UP TO THE ':' CHAR)
+		int twoDots = 0;
+		for (int i = 0; i < length; i++){
+			twoDots++;
+			char x = commandLine.charAt(i);
+			if (x == ':'){
+				sentinel = true;
+				break;
+			}
+		}
+		
+		// GET COMMAND LINE
+		String commandTemp = commandLine.substring(0, twoDots);
+		String command = commandTemp.toUpperCase();
+		String cmdINPUT = commandLine.substring(twoDots);
+		
+		// IS EMPTY? 
+		int emptyINPUT = length - twoDots;
+		
+		// HOW MANY NON SPACE " " CHARS DOES IT HAS?
+		int validChar = 0;
+		for (int j = twoDots; j < length; j++){
+			char p = commandLine.charAt(j);
+			if (p != ' '){
+				validChar++;
+			}
+		}
+		
+		// ASSIGN VALUES TO "GLOBAL" VARIABLES
+		if (command.equals("QUIT") || command.equals("DATA:")){
+			cmd = command;
+			input = "";
+		}else if (emptyINPUT > 2 && validChar > 3 && sentinel == true){
+			cmd = command;
+			input = cmdINPUT;
+		} else {
+			cmd = "";
+			input = "";
+		}
+		
+		
+	} // \\\\\\\\\\\\\\\\\\\\\ //
 	
 	///////////////////////////////////////////////////////////
 	// CommandMenu 
 	//////////////////////////////////////////////////////////
 	public static void CommandMenu(){
+		
+		// INIT CONTAINERS
+		MailData mailData = new MailData();
 	
 		System.out.println("Enter your Command:");
 		
 		Scanner in = new Scanner(System.in);
+		
 		
 		boolean loop = true;
 		while (loop == true){
@@ -47,72 +121,111 @@ public class MailServer {
 			System.out.print(">>> ");
 			// Get Command
 			String commandLine = in.nextLine();
-			int length = commandLine.length();
+			// SEND THE LINE FOR PROCESSING
+			CmdProcessor(commandLine);
 			
-			// get the length up to :
-			int twoDots = 0;
-			for (int i = 0; i < length; i++){
-				twoDots++;
-				char x = commandLine.charAt(i);
-				if (x == ':'){
-					break;
+			// if not empty and has more than five chars then proceed
+			if (( !cmd.equals("") && !input.equals("") ) 
+					|| ( (cmd.equals("QUIT") || cmd.equals("DATA:")) && input.equals("") )){
+				
+				// COMMAND OPTIONS
+				if (cmd.equals("QUIT")) {
+					loop = false;
+					
+				}else if(cmd.equals("MAIL FROM:")){
+					
+					// Get and check Sender email
+					mailData.from = MailChecker(input, cmd);
+					// System.out.println("mailData FROM = " + mailData.to);
+					
+				}else if (cmd.equals("MAIL TO:")){
+					
+					// Get and check Sender email
+					mailData.to = MailChecker(input, cmd);
+					// System.out.println("mailData TO = " + mailData.to);
+				
+				}else if (cmd.equals("DATA:")){
+					
+					// Get the message
+					MailMessage();
+					
+				}else if (cmd.equals("HELP:")){
+					// SHOW THE HELP MENU
+					HelpMessage();
+				}else{
+					System.out.println("ERROR: Command NOT recognized!!");
 				}
-			}
-			String commandTemp = commandLine.substring(0, twoDots);
-			String command = commandTemp.toUpperCase();
-			String cmdINPUT = commandLine.substring(twoDots);
-			System.out.println("Command: " + command);
-			System.out.println("cmdINPUT: " + cmdINPUT);
-			
-			int quitter = command.length(); 
-			if (quitter == 4 && command.equals("QUIT")) {
-				loop = false;
-				
-			}else if(command.equals("MAIL FROM:")){
-				
-				// Get and check Sender email
-				MailFrom();
-				
-			}else if (command.equals("MAIL TO:")){
-				
-				// Get and check Receiver email
-				MailTo();
-				
-			}else if (command.equals("DATA:")){
-				
-				// Get the message
-				MailMessage();
-				
-			}else if (command.equals("HELP:")){
-				// SHOW THE HELP MENU
-				HelpMessage();
-			}else{
-				System.out.println("ERROR: Command NOT recognized!!");
+			}else {
+				System.out.println("Empty Command");
 			}
 		}
 	
 		
 	} // \\\\\\\\\\\\\\\\\\\\\ //
 
-	///////////////////////////////////////////////////////////
-	// MailFrom 
-	//////////////////////////////////////////////////////////
-	public static void MailFrom(){
-		System.out.println("Je sui le MailFrom");
-	} // \\\\\\\\\\\\\\\\\\\\\ //
 	
 	///////////////////////////////////////////////////////////
-	// MailFrom 
+	// MailChecker 
 	//////////////////////////////////////////////////////////
-	public static void MailTo(){
-		System.out.println("Je sui le MailTo");
+	public static String MailChecker(String mailTo, String which){
+		
+		// GET THE LENGTH OF RECEIVED VARIABLE
+		int lengthX = mailTo.length();
+		
+		// INIT NEW CLEAN VERSION
+		String newMailTo = "";
+		// @ checker
+		boolean at = false;
+		
+		// CLEAN FROM EXTRA SPACES and Check for '@'
+		for (int i = 0; i < lengthX; i++){
+			char x = mailTo.charAt(i);
+			if (x != ' '){
+				newMailTo += x;
+			}
+			if (x == '@'){
+				at = true;
+			}
+			
+		}
+		// GET THE LENGTH OF CLEANED VARIABLE
+		int lengthY = newMailTo.length();
+		// CHECK @
+		char first = newMailTo.charAt(0);
+		// System.out.println("first char = " + first);
+		char last = newMailTo.charAt(lengthY-1);
+		// System.out.println("last char = " + last);
+		
+		if (first == '@' || last == '@' || at == false){
+				System.out.println("Invalid email!  \n >> Retype Command with a valid email.");
+				return null;
+		}
+		
+		return newMailTo;
+		
+		
 	} // \\\\\\\\\\\\\\\\\\\\\ //
 	
 	///////////////////////////////////////////////////////////
 	// MailMessage
 	//////////////////////////////////////////////////////////
 	public static void MailMessage(){
-	System.out.println("Je sui le MailMessage");
+		
+		System.out.println("Type your message");
+		System.out.print("When you are done write a line with one dot");
+		
+		Scanner in = new Scanner(System.in);
+		String text = "";
+		
+		String line = "";
+		while (true){
+			System.out.print("\n>> ");
+			line = in.nextLine();
+			if (line.equals("."))break;
+			text += line + "\n"; 
+		}
+		System.out.println(text);
+		
 	} // \\\\\\\\\\\\\\\\\\\\\ //
 	
 	///////////////////////////////////////////////////////////
@@ -124,18 +237,18 @@ public class MailServer {
 							"\n| The following COMMANDS exactly, without the quotes          |" +
 							"\n| and in the right order                                      |" +
 							"\n|_____________________________________________________________|" +
-							"\n| (1) \"MAIL FROM:\"                                            |" +
+							"\n| (1) \"MAIL FROM:\"  <email-address>                           |" +
 							"\n|   >> then enter your valid email address, ex.:              |" + 
 							"\n|   >> yourAdress@email.com                                   |" +
 							"\n|_____________________________________________________________|" +
-							"\n| (2) \"RPCT TO:\"                                              |" +
+							"\n| (2) \"RPCT TO:\"  <email-address>                             |" +
 							"\n|   >> then enter the recipients email address, ex.:          |" +
 							"\n|   >> recipents@email.com                                    |" +
 							"\n|_____________________________________________________________|" +
 							"\n| (3) \"DATA:\"                                                 |" +
 							"\n|   >> finally, write your message                            |" +
 							"\n|_____________________________________________________________|" +
-							"\n| (?) \"HELP\"                                                 |" +
+							"\n| (?) \"HELP\"                                                  |" +
 							"\n|   >> to see this menu again                                 |" +
 							"\n|_____________________________________________________________|");
 	} // \\\\\\\\\\\\\\\\\\\\\ //
