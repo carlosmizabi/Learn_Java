@@ -88,7 +88,7 @@ public class MailServer {
 		}
 		
 		// ASSIGN VALUES TO "GLOBAL" VARIABLES
-		if (command.equals("QUIT") || command.equals("DATA:")){
+		if (command.equals("QUIT") || command.equals("DATA:") || command.equals("HELP:")){
 			cmd = command;
 			input = "";
 		}else if (emptyINPUT > 2 && validChar > 3 && sentinel == true){
@@ -116,9 +116,11 @@ public class MailServer {
 		
 		
 		boolean loop = true;
+		int order = 1;
 		while (loop == true){
 			
 			System.out.print(">>> ");
+			
 			// Get Command
 			String commandLine = in.nextLine();
 			// SEND THE LINE FOR PROCESSING
@@ -126,37 +128,46 @@ public class MailServer {
 			
 			// if not empty and has more than five chars then proceed
 			if (( !cmd.equals("") && !input.equals("") ) 
-					|| ( (cmd.equals("QUIT") || cmd.equals("DATA:")) && input.equals("") )){
+					|| ((cmd.equals("QUIT") || cmd.equals("DATA:") || cmd.equals("HELP:")) && input.equals("") )){
 				
 				// COMMAND OPTIONS
 				if (cmd.equals("QUIT")) {
 					loop = false;
 					
-				}else if(cmd.equals("MAIL FROM:")){
+				}else if(cmd.equals("MAIL FROM:") && order == 1){
 					
 					// Get and check Sender email
 					mailData.from = MailChecker(input, cmd);
 					// System.out.println("mailData FROM = " + mailData.to);
+					order++;
 					
-				}else if (cmd.equals("MAIL TO:")){
+				}else if (cmd.equals("MAIL TO:") && order == 2){
 					
 					// Get and check Sender email
 					mailData.to = MailChecker(input, cmd);
 					// System.out.println("mailData TO = " + mailData.to);
+					order++;
 				
-				}else if (cmd.equals("DATA:")){
+				}else if (cmd.equals("DATA:") && order == 3){
 					
 					// Get the message
-					MailMessage();
+					mailData.message = MailMessage();
+					
+					System.out.println("Sending message...");
+					System.out.println("MAIL FROM: " + mailData.from);
+					System.out.println("MAIL TO: " + mailData.to);
+					System.out.println(mailData.message);
+					System.out.println("...done!");
+					order = 1;
 					
 				}else if (cmd.equals("HELP:")){
 					// SHOW THE HELP MENU
 					HelpMessage();
 				}else{
-					System.out.println("ERROR: Command NOT recognized!!");
+					System.out.println("Invalid Command!");
 				}
 			}else {
-				System.out.println("Empty Command");
+				System.out.println("Invalid Command!");
 			}
 		}
 	
@@ -209,24 +220,27 @@ public class MailServer {
 	///////////////////////////////////////////////////////////
 	// MailMessage
 	//////////////////////////////////////////////////////////
-	public static void MailMessage(){
+	public static String MailMessage(){
 		
 		System.out.println("Type your message");
-		System.out.print("When you are done write a line with one dot");
+		System.out.println("When you are done write a line with one dot");
 		
 		Scanner in = new Scanner(System.in);
 		String text = "";
 		
 		String line = "";
 		while (true){
-			System.out.print("\n>> ");
+			System.out.println(">> ");
 			line = in.nextLine();
-			if (line.equals("."))break;
+			if (line.equals(".")){
+				break;
+			}
 			text += line + "\n"; 
 		}
-		System.out.println(text);
+		return text;
 		
 	} // \\\\\\\\\\\\\\\\\\\\\ //
+	
 	
 	///////////////////////////////////////////////////////////
 	// HelpMessage
@@ -248,8 +262,8 @@ public class MailServer {
 							"\n| (3) \"DATA:\"                                                 |" +
 							"\n|   >> finally, write your message                            |" +
 							"\n|_____________________________________________________________|" +
-							"\n| (?) \"HELP\"                                                  |" +
-							"\n|   >> to see this menu again                                 |" +
+							"\n|  \"HELP:\"                                                    |" +
+							"\n|   >> finally, write your message                            |" +
 							"\n|_____________________________________________________________|");
 	} // \\\\\\\\\\\\\\\\\\\\\ //
 	
