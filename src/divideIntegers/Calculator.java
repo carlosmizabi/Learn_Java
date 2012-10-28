@@ -28,19 +28,22 @@ public class Calculator {
 		int menuOpt; // menu opt
 		boolean repeat = true;
 		
+		// repeats as many times as the user wants
 		while (repeat == true){
 			menuOpt = 0; // second number
 			
-			System.out.print("Enter the operation you would like to do: "); // promtp for input
-			menuOpt = input.nextInt(); // read second integer
+			// display menu and ask for option
+			menuDisplay();
+			menuOpt = input.nextInt(); // read menu option
 			
 			// call and send operation number
+			if (menuOpt > 0 && menuOpt < 6){
 			menuSwitch(menuOpt);
-			
-		}
 		
-		// Exit menu
-		repeat = exitMenu();
+			// Exit or repeat
+			repeat = exitMenu();
+			}
+		}
 
 	} // \\\\\\\\\\\\\\\\\\\\\ //
 	
@@ -63,18 +66,23 @@ public class Calculator {
 		
 		switch (menuOpt){
 			case 1:
+				System.out.println("\nAddition:");
 				add(number1, number2);
 				break;
 			case 2:
+				System.out.println("\nSubtraction:");
 				subtract(number1, number2);
 				break;
 			case 3:
+				System.out.println("\nMultiplication:");
 				multiply(number1, number2);
 				break;
 			case 4:
+				System.out.println("\nDivision:");
 				divide(number1, number2);
 				break;
 			case 5:
+				System.out.println("\nModulus:");
 				modulus(number1, number2);
 				break;
 			default:
@@ -123,6 +131,28 @@ public class Calculator {
 		System.out.println("Hello mod");
 	}// \\\\\\\\\\\\\\\\\\\\\ //
 	
+	
+	///////////////////////////////////////////////////////////
+	// menuDisplay()
+	//////////////////////////////////////////////////////////
+	public static void menuDisplay()
+	{
+	
+		System.out.println ("\n _____________________ " +
+		                    "\n| Menu:               |" +
+		                    "\n|_____________________|" +
+		                    "\n| Addition........> 1 |" +
+		                    "\n| Subtraction.....> 2 |" +
+		                    "\n| Multiplication..> 3 |" +
+		                    "\n| Division........> 4 |" +
+		                    "\n| Modulus.........> 5 |" +
+		                    "\n|_____________________|" +
+		                    "\n" +
+		                    "\nPlease, enter the number of the \nexercise you would like to see... " +
+		                    "\n>> ");
+		
+	} // \\\\\\\\\\\\\\\\\\ //
+
 	///////////////////////////////////////////////////////////
 	// Repeat or Exit menu
 	//////////////////////////////////////////////////////////
