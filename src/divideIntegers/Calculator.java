@@ -96,7 +96,8 @@ public class Calculator {
 	//////////////////////////////////////////////////////////
 	public static void subtract(int a, int b)
 	{
-		System.out.println("Hello Sub");
+		//display results
+		System.out.printf("\nSubstraction is %d\n", (a - b));
 	}// \\\\\\\\\\\\\\\\\\\\\ //
 	
 	///////////////////////////////////////////////////////////
@@ -104,7 +105,8 @@ public class Calculator {
 	//////////////////////////////////////////////////////////
 	public static void multiply(int a, int b)
 	{
-		System.out.println("Hello mult");
+		//display results
+		System.out.printf("\nProduct is %d\n", (a * b));
 	}// \\\\\\\\\\\\\\\\\\\\\ //
 
 	///////////////////////////////////////////////////////////
@@ -112,7 +114,8 @@ public class Calculator {
 	//////////////////////////////////////////////////////////
 	public static void divide(int a, int b)
 	{
-		System.out.println("Hello divide");
+		//display results
+		System.out.printf("\nProduct is %d\n", (a / b));
 	}// \\\\\\\\\\\\\\\\\\\\\ //
 
 	///////////////////////////////////////////////////////////
@@ -120,7 +123,8 @@ public class Calculator {
 	//////////////////////////////////////////////////////////
 	public static void add(int a, int b)
 	{
-		System.out.println("Hello add");
+		//display results
+		System.out.printf("\nSum is %d\n", (a + b));
 	}// \\\\\\\\\\\\\\\\\\\\\ //
 	
 	///////////////////////////////////////////////////////////
@@ -128,7 +132,8 @@ public class Calculator {
 	//////////////////////////////////////////////////////////
 	public static void modulus(int a, int b)
 	{
-		System.out.println("Hello mod");
+		//display results
+		System.out.printf("\nModulus is %d\n", (a % b));
 	}// \\\\\\\\\\\\\\\\\\\\\ //
 	
 	
