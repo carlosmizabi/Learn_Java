@@ -51,7 +51,7 @@ public class Calculator {
 	///////////////////////////////////////////////////////////
 	// menuSwitch
 	//////////////////////////////////////////////////////////
-	public static void menuSwitch(int menuOpt)
+	private static void menuSwitch(int menuOpt)
 	{
 		int number1; // first number
 		int number2; // second number
@@ -94,7 +94,7 @@ public class Calculator {
 	///////////////////////////////////////////////////////////
 	// subtract
 	//////////////////////////////////////////////////////////
-	public static void subtract(int a, int b)
+	private static void subtract(int a, int b)
 	{
 		//display results
 		System.out.printf("\nSubstraction is %d\n", (a - b));
@@ -103,7 +103,7 @@ public class Calculator {
 	///////////////////////////////////////////////////////////
 	// multiply()
 	//////////////////////////////////////////////////////////
-	public static void multiply(int a, int b)
+	private static void multiply(int a, int b)
 	{
 		//display results
 		System.out.printf("\nProduct is %d\n", (a * b));
@@ -112,7 +112,7 @@ public class Calculator {
 	///////////////////////////////////////////////////////////
 	// divide()
 	//////////////////////////////////////////////////////////
-	public static void divide(int a, int b)
+	private static void divide(int a, int b)
 	{
 		//display results
 		System.out.printf("\nProduct is %d\n", (a / b));
@@ -121,7 +121,7 @@ public class Calculator {
 	///////////////////////////////////////////////////////////
 	// add()
 	//////////////////////////////////////////////////////////
-	public static void add(int a, int b)
+	private static void add(int a, int b)
 	{
 		//display results
 		System.out.printf("\nSum is %d\n", (a + b));
@@ -130,7 +130,7 @@ public class Calculator {
 	///////////////////////////////////////////////////////////
 	// modulus()
 	//////////////////////////////////////////////////////////
-	public static void modulus(int a, int b)
+	private static void modulus(int a, int b)
 	{
 		//display results
 		System.out.printf("\nModulus is %d\n", (a % b));
@@ -140,7 +140,7 @@ public class Calculator {
 	///////////////////////////////////////////////////////////
 	// menuDisplay()
 	//////////////////////////////////////////////////////////
-	public static void menuDisplay()
+	private static void menuDisplay()
 	{
 	
 		System.out.println ("\n _____________________ " +
@@ -161,7 +161,7 @@ public class Calculator {
 	///////////////////////////////////////////////////////////
 	// Repeat or Exit menu
 	//////////////////////////////////////////////////////////
-	public static boolean exitMenu()
+	private static boolean exitMenu()
 	{
 	
 		System.out.println("");
