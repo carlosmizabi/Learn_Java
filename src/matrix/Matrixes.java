@@ -8,12 +8,12 @@ public class Matrixes {
 	 * 
 	 * • a constructor method Matrix(int,int) setting the size of the array
 	 *  as two integers (not necessarily the same). All elements in the matrix 
-	 *  should be initialised to 1.
+	 *  should be initialized to 1.
 	 * 
 	 * • a method setElement(int,int) to modify one element of the array, 
 	 * given its position as two integers. The method must check that the indexes 
 	 * are valid before modifying the array to avoid an IndexOutOfBoundsException.
-	 * If the indeces are invalid, the method will do nothing.
+	 * If the indexes are invalid, the method will do nothing.
 	 * 
 	 * • a method setRow(int,String) that modifies one whole row of the array, 
 	 * given its position as an integer and the list of numbers as a String 
