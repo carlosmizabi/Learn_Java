@@ -114,8 +114,10 @@ public class Calculator {
 	//////////////////////////////////////////////////////////
 	private static void divide(int a, int b)
 	{
+		double c = (int) a;
+		double d = (int) b;
 		//display results
-		System.out.printf("\nProduct is %d\n", (a / b));
+		System.out.println("\nProduct is " + (c / d));
 	}// \\\\\\\\\\\\\\\\\\\\\ //
 
 	///////////////////////////////////////////////////////////
