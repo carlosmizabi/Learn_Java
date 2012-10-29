@@ -25,8 +25,8 @@ public class Matrix {
 	 *   # 7 > prettyPrint() that prints the values of the matrix on screen in a 
 	 * 		   legible format
 	 * 
-	 *  # 8 > int[] stringToArray(int String) takes a string checks 
-	 *  	  format converts to int[] and returns it
+	 *  # 8 > int[] stringToArray(String,String) takes a string checks 
+	 *  	  format converts to int[] and returns it 
 	 * 
 	 *////////////////////////////////////////////////////////////
 	
@@ -135,13 +135,14 @@ public class Matrix {
 		{
 			// v System.out.println("initiated if(validRow)");
 			
-			int []validArray = stringToArray(rows, string);
+			int []validArray = stringToArray(string, "ROW");
 			if(validArray[0] == 1)
 			{
 				// v System.out.println("initiated if(validArray)");
 				
-				for(int i = 0; i < array.length; i++)
+				for(int i = 0; i < array[0].length; i++)
 				{
+
 					array[rows][i] = validArray[i+1];
 				}
 			}
@@ -162,8 +163,33 @@ public class Matrix {
 	 * correct (i.e. if the array has four rows, the String contains four numbers). 
 	 * If the index or the String is invalid, the method will do nothing.
 	 */
-	private void setColumn(int a, String d)
+	public void setColumn(int column, String string)
 	{
+		// rows validity sentinel - check row
+		boolean validColumn = validCall(0,column);
+		
+		// v System.out.println("The row length is: " + array[rows].length);
+		
+		// if valid set element
+		if (validColumn)
+		{
+			// v System.out.println("initiated if(validRow)");
+			
+			int []validArray = stringToArray(string, "COLUMN");
+			if(validArray[0] == 1)
+			{
+				// v System.out.println("initiated if(validArray)");
+				
+				for(int i = 0; i < array.length; i++)
+				{
+					array[i][column] = validArray[i+1];
+				}
+			}
+		}
+		/*// Check values
+		 * for(int i = 0; i < array[rows].length; i++){
+			System.out.print(array[rows][i] + " | ");
+		}*/
 		
 	} // \\\\\\\\\\\\\\\\\\\\\ //
 	
@@ -194,30 +220,49 @@ public class Matrix {
 	 */
 	public void prettyPrint()
 	{
-		
+		System.out.println("");
+		for (int i = 0; i < array.length; i++)
+		{
+			System.out.println("");
+			for (int j = 0; j < array[i].length; j++){
+				System.out.print("\t" + array[i][j]);
+			}
+		}
+		System.out.println("");
 	} // \\\\\\\\\\\\\\\\\\\\\\\ //
 	
 	///////////////////////////////////////////////////////////
 	// 8 | stringToArray
 	//////////////////////////////////////////////////////////
 	/*
-	 * >> “1,2,3” 
+	 * >> Takes a int objID which identifies the row 
 	 */
-	public int[] stringToArray(int rows, String string)
+	public int[] stringToArray(String string, String which)
 	{
 		// remove white space at start and end
 		string = string.trim();
+		int arraySize = 0;
+		boolean invalid = false;
 		
-		// get the length of the array
-		int arraySize = array[rows].length;
+		
+		// make the string upper case
+		which = which.toUpperCase();
+		if (which.equals("ROW"))
+		{
+			// get the length of the array row (num of columns)
+			arraySize = array[0].length;
+		}else if (which.equals("COLUMN")){
+			// get the length of the array columns (num of rows)
+			arraySize = array.length;
+		}else{
+			// set to invalid
+			invalid = true;
+		}
 		
 		// set valid array plus one for condition
 		// the first position of the array [0] classifies
 		// the string as either valid (1) or not valid (0)
 		int[] valid = new int[arraySize + 1];
-		
-		// v System.out.println("valid length " + valid.length);
-		
 		int intCount = 0;
 		int totalCount = 0;
 		if (string.length() > 1){
@@ -232,7 +277,7 @@ public class Matrix {
 				
 				char x = string.charAt(i);
 				
-				// v System.out.println("CHAR X = " + x);
+				  // v System.out.println("CHAR X = " + x);
 				
 				// if number or a comma proceed else invalid
 				if ((x >= '0' && x <= '9') || x == ','){
@@ -247,7 +292,7 @@ public class Matrix {
 						// since it is a number increase itemCount
 						intCount++;
 						
-						// v System.out.println("itemCount = " + itemCount);
+						// v System.out.println("itemCount = " + intCount);
 						// are the number of items within array size?
 						// if yes assign it else then invalid exit
 						if (intCount <= arraySize+1){
@@ -257,7 +302,7 @@ public class Matrix {
 							// v System.out.println("itemCount = " + intCount);
 							valid[intCount] = (x - 48);
 
-							// v System.out.println("valid[" + (itemCount) + "] =" + valid[itemCount] );
+							 // v System.out.println("valid[" + (intCount) + "] =" + valid[intCount] );
 							// validity assignment
 							valid[0] = 1;
 							// v System.out.println("valid[0] =" + valid[0] );
@@ -280,12 +325,12 @@ public class Matrix {
 		}
 		// if trimmed string is greater than the ((row size * 2) - 1) (commas)
 		// then it is invalid
-		if(string.length() > ((array[rows].length)*2-1)){
+		if(string.length() > ((arraySize)*2-1) || invalid){
 			valid[0] = 0;
 		}
 	
 		//check the values
-		/* for(int i = 0; i < valid.length; i++){
+		/*/ for(int i = 0; i < valid.length; i++){
 			System.out.print(valid[i] + " | ");
 		}
 		*/

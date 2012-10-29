@@ -39,19 +39,27 @@ public class Matrixes {
 	
 	public static void main(String[] args) {
 		
-		int a = 3;
-		int b = 3;
+		int a = 4; // rows
+		int b = 3; // columns
 		Matrix matrix = new Matrix(a,b);
 		
 		/*
 		 * {00,01,02}
 		 * {10,11,12}
 		 * {20,21,22}
+		 * {30,31,32}
 		 */
+		matrix.prettyPrint(); 
 		
 		String string = " 9,8,7 ";
 		//matrix.setElement(1,1);
 		matrix.setRow(1,string);
+		matrix.prettyPrint();
+		matrix.setColumn(1, string);
+		matrix.prettyPrint();
+		
+		// display matrix values
+		
 	}
 
 }
