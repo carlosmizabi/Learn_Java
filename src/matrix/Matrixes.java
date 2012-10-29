@@ -48,7 +48,10 @@ public class Matrixes {
 		 * {10,11,12}
 		 * {20,21,22}
 		 */
-		matrix.setElement(1,1);
+		
+		String string = " 9,8,7 ";
+		//matrix.setElement(1,1);
+		matrix.setRow(1,string);
 	}
 
 }
