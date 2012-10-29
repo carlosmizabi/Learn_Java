@@ -39,7 +39,16 @@ public class Matrixes {
 	
 	public static void main(String[] args) {
 		
-
+		int a = 3;
+		int b = 3;
+		Matrix matrix = new Matrix(a,b);
+		
+		/*
+		 * {00,01,02}
+		 * {10,11,12}
+		 * {20,21,22}
+		 */
+		matrix.setElement(1,1);
 	}
 
 }

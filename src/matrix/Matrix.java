@@ -1,7 +1,11 @@
 package matrix;
 
+import java.util.Scanner;
+
 public class Matrix {
 	
+	
+	private int[][] array;
 	
 	/*///////////////////////////////////////////////////////////
 	 * Class Index
@@ -32,9 +36,13 @@ public class Matrix {
 	 */
 	public Matrix(int a, int b)
 	{
+		// 2-D Array
+		array = new int[a][b];
 		
-		int[] ab = new int[a];
-		int[] bb = new int[b];
+		/* Array model:
+		 * 	{*,*,...}
+		 * 	{*,*,...}
+		 */
 		
 	} // \\\\\\\\\\\\\\\\\\\\\\\ //
 	
@@ -48,8 +56,41 @@ public class Matrix {
 	 * are valid before modifying the array to avoid an IndexOutOfBoundsException.
 	 * If the indexes are invalid, the method will do nothing.
 	 */
-	private void setElement (int c, int d)
+	public void setElement(int rows, int columns)
 	{
+		// validity sentinel 
+		boolean valid = false;
+		
+		System.out.println("This is the length of the array:" + array.length);
+		
+		// check if (rows) fits the array
+		if (rows <= array.length && rows >= 0){
+			// check if (columns) fits the array
+			if(columns <= array[0].length && columns >= 0 ){
+				valid = true;
+			}
+		}
+		
+		System.out.println("The current value of Array Element [" + rows + 
+				"][" + columns + "]\n" + " = " +
+				array[rows][columns]
+				);
+		// if valid set element
+		if (valid){
+			System.out.println("The value to insert: ");
+			Scanner in = new Scanner(System.in); 
+			int newValue = in.nextInt();
+			
+			array[rows][columns] = newValue;
+			
+			System.out.println("The value of Array Element [" + rows + 
+					"][" + columns + "]\n" + "has been changed to " +
+					array[rows][columns]
+					);
+			
+		}
+	
+		
 		
 	} // \\\\\\\\\\\\\\\\\\\\\\\\ //
 	
