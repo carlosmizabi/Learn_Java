@@ -52,11 +52,19 @@ public class Matrixes {
 		matrix.prettyPrint(); 
 		
 		String string = " 9,8,7 ";
-		//matrix.setElement(1,1);
+		// set element
+		matrix.setElement(3,2);
+		
+		//set row
 		matrix.setRow(1,string);
 		matrix.prettyPrint();
+		
+		//set column
 		matrix.setColumn(1, string);
 		matrix.prettyPrint();
+		
+		// print it
+		System.out.println(matrix.toString());
 		
 		// display matrix values
 		

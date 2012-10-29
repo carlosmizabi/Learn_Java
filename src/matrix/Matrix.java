@@ -71,7 +71,6 @@ public class Matrix {
 				valid = true;
 			}
 		}
-		
 		return valid;
 	} // \\\\\\\\\\\\\\\\\\\\\\\ //
 	
@@ -90,12 +89,13 @@ public class Matrix {
 		// validity sentinel - check row and column
 		boolean valid = validCall(rows,columns);
 
-		System.out.println("The current value of Array Element [" + rows + 
-				"][" + columns + "]\n" + " = " +
-				array[rows][columns]
-				);
-		// if valid set element
-		if (valid){
+		if (valid == true){
+			System.out.println("The current value of Array Element [" + rows + 
+					"][" + columns + "]\n" + " = " +
+					array[rows][columns]
+					);
+			// if valid set element
+		
 			System.out.println("The value to insert: ");
 			Scanner in = new Scanner(System.in); 
 			int newValue = in.nextInt();
@@ -203,7 +203,35 @@ public class Matrix {
 	 */
 	public String toString()
 	{
-		String string = "";
+		
+	    String string = "[";
+	    String temp;
+	    int rowSize = 0;
+	    int colSize = 0;
+	    
+		for (int i = 0; i < array.length; i++)
+		{
+			rowSize++;
+		
+			for (int j = 0; j < array[i].length; j++){
+				colSize++;
+				string += array[i][j];
+				
+				if((colSize + rowSize) < (array[0].length + array.length))
+				{
+					if (colSize != array[0].length){
+						string += ",";
+					}else{
+						string += ";";
+						colSize = 0;
+					}
+			
+				}
+			}
+			
+		}
+		string += "]";
+		
 		return string;
 	}// \\\\\\\\\\\\\\\\\\\\\\\ //
 	
