@@ -39,21 +39,20 @@ public class Matrixes {
 	
 	public static void main(String[] args) {
 		
-		int a = 4; // rows
+		int a = 2; // rows
 		int b = 3; // columns
 		Matrix matrix = new Matrix(a,b);
 		
-		/*
+		/* 
 		 * {00,01,02}
 		 * {10,11,12}
-		 * {20,21,22}
-		 * {30,31,32}
 		 */
 		matrix.prettyPrint(); 
 		
-		String string = " 9,8,7 ";
+		/*
+		String string = " 9,8 ";
 		// set element
-		matrix.setElement(3,2);
+		matrix.setElement(1,2);
 		
 		//set row
 		matrix.setRow(1,string);
@@ -66,6 +65,15 @@ public class Matrixes {
 		// print it
 		System.out.println(matrix.toString());
 		
+		System.out.println("\n The setMatrix: ");
+		*/
+		
+		//change the all matrix
+		String gString = "{11,22,33;44,55,66}";
+		String bString = "{11,22,33;44,55,66,8}";
+		
+		matrix.setMatrix(gString);
+		matrix.prettyPrint();
 		// display matrix values
 		
 	}

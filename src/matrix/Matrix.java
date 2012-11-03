@@ -27,6 +27,8 @@ public class Matrix {
 	 * 
 	 *  # 8 > int[] stringToArray(String,String) takes a string checks 
 	 *  	  format converts to int[] and returns it 
+	 *  
+	 *  # 9 > setMatrix(String) - modifies a whole matrix
 	 * 
 	 *////////////////////////////////////////////////////////////
 	
@@ -265,8 +267,7 @@ public class Matrix {
 	/*
 	 * >> Takes a int objID which identifies the row 
 	 */
-	public int[] stringToArray(String string, String which)
-	{
+	public int[] stringToArray(String string, String which){
 		// remove white space at start and end
 		string = string.trim();
 		int arraySize = 0;
@@ -367,4 +368,159 @@ public class Matrix {
 		return valid;
 	} // \\\\\\\\\\\\\\\\\\\\\\\ //
 
-}
+	///////////////////////////////////////////////////////////
+	// 9 | setMatrix()
+	//////////////////////////////////////////////////////////
+	/*
+	 * a method setMatrix(String) that takes a String 
+	 * representing the numbers to be put in the elements 
+	 * of the array separated by commas, separating rows by 
+	 * semicolons, e.g. 1,2,3;4,5,6;7,8,9.
+	 */
+    public void setMatrix(String string)
+    {
+    	/* Conditions:
+    	 * at the end of a row there must be a semicolon
+    	 * each number must be proceeded by a comma
+    	 * it must be of the same size as the array
+    	 * 
+    	 * must convert from string to int
+    	 * take the array apart row by row and ask if valid
+    	 * use valid call
+    	 */
+    	
+    	// arraySize
+    	int arraySize = array.length * array[0].length; 
+    	// the array to hold all converted values
+    	int[] arrayMule = new int[arraySize];
+    	// valid?
+    	boolean valid = true;
+    	
+    	// check if string starts and ends properly
+    	if (string.charAt(0) == '{' &&  string.charAt(string.length()-1) == '}')
+    	{
+    		// now remove start and end characters "{}"
+    		string = string.substring(1, string.length()-1);
+    	}else{
+    		valid = false;
+    	}
+    	
+    	// if not a number or a comma or semicolon = invalid
+    	if (valid == true)
+    	{	
+    		for(int i = 0; i < string.length(); i++)
+    		{
+    			char x = string.charAt(i);
+    			// v System.out.println(" char: " + x);
+    			if ((x != ',' && x != ';') && (x < '0' || x >'9'))
+    			{
+    				valid = false;
+    				break;
+    			}
+    		}
+    	}
+    		
+    	if (valid == true)
+    	{
+    		// v System.out.println("Happy Days!");
+    		// v System.out.println(string);
+    		
+    		// variables 
+    		int substringCount = 0;	 // create substrings up to comma
+    		String subString = "";
+    		int itemCount = 0; 	    // item counter > at end must have same size as arraySize
+    		int prevSub = 0; 		// hold the previous value
+    		int rowCounter = 0; 	// row counter counts items up to the ;
+    		
+    		for(int i = 0; i <= string.length()-1; i++)
+    		{
+    			// get char
+    			char x = string.charAt(i);
+    			// count char
+    			substringCount++;
+    			
+    			// semicolon condition
+    			if(x == ';'){
+    				if(rowCounter != array[0].length-1)
+    				{ // if not equal to num of column
+    					valid = false;
+	    				break;
+    				}else{
+    					rowCounter = 0;
+    				}
+    			}
+    			
+    			if(x == ',' || x == ';' || i == string.length()-1)
+    			{
+    				// set the subString up to comma 
+    				if (i != string.length()-1)
+    				{
+    					subString = string.substring(prevSub, substringCount-1);
+    				}else //if end of string adjust
+    				{
+    					subString = string.substring(prevSub, substringCount);
+    				}
+    				// convert string to an integer
+    				int temp = stringToInt(subString);
+    			    // v System.out.println("Current tem value = " + temp);
+    				
+    			    prevSub = substringCount;
+    			    itemCount++;
+    			    rowCounter++;
+    			    
+    			    
+    			    // only assign if within bounds
+    			    if (itemCount <= arraySize)
+    			    {
+	    			    // assign value to arrayMule
+	    			    arrayMule[itemCount-1] = temp;
+    			    }else{
+    			    	// not valid stop
+    			    	valid = false;
+    			    	break;
+    			    }
+    			    
+    			}
+    		}
+    	}
+    	
+    	// if still valid then assign
+		if(valid == true)
+		{
+    		// assign arrayMule to array
+		    int arrayMuleCount = 0;
+			for (int i = 0; i < array.length; i++)
+			{
+				for (int j = 0; j < array[i].length; j++)
+				{
+					array[i][j] = arrayMule[arrayMuleCount];
+					arrayMuleCount++;
+					//System.out.println(" | " + array[i][j]);
+				}
+			}
+		}
+    }
+	///////////////////////////////////////////////////////////
+	// 9 | stringToInt()
+	//////////////////////////////////////////////////////////
+	/*
+	* takes a string and returns a integer
+	*/
+	private int stringToInt(String string)
+	{
+		int converted = 0;
+		
+		//now lets converts the string to a number
+	    int temp = 0;
+	    for (int j = 0; j <= string.length()-1; j++)
+	    {
+	    	char y = string.charAt(j);
+	    	int t = y - 48;
+	    	t = (int) (t * Math.pow(10, ((string.length()-1) - j)));
+	    	converted += t;	
+	    }
+		
+		return converted;
+	}
+	
+} //******************************************************//
